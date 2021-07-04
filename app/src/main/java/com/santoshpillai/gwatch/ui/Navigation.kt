@@ -11,6 +11,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.santoshpillai.gwatch.ui.AppDestinations.CREATEWATCH
 import com.santoshpillai.gwatch.ui.AppDestinations.HOMESCREEN
+import com.santoshpillai.gwatch.ui.home.HomeScreen
+import com.santoshpillai.gwatch.ui.home.HomeScreenViewModel
 
 object AppDestinations{
     const val HOMESCREEN = "home"
@@ -39,13 +41,17 @@ class NavActions(private val navController: NavController) {
 
 @ExperimentalMaterialApi
 @Composable
-fun NavGraph(){
+fun NavGraph(
+    homeScreenVm: HomeScreenViewModel
+){
     val navController = rememberNavController()
     // TODO: Understand this line
     val navActions by remember { mutableStateOf(NavActions(navController = navController))}
     NavHost(navController = navController, startDestination = HOMESCREEN ) {
         composable(HOMESCREEN){
-            HomeScreen()
+            HomeScreen(
+                vm = homeScreenVm
+            )
         }
 
         composable(CREATEWATCH){
